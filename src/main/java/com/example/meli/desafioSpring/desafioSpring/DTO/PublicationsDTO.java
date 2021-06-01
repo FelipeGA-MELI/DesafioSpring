@@ -3,7 +3,6 @@ package com.example.meli.desafioSpring.desafioSpring.DTO;
 import java.util.Date;
 
 public class PublicationsDTO {
-    private Integer userId;
     private Integer id_post;
     private Date date;
     private ProductsDTO detail;
@@ -11,14 +10,6 @@ public class PublicationsDTO {
     private double price;
     private Boolean hasPromo;
     private double discount;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Integer getId_post() {
         return id_post;

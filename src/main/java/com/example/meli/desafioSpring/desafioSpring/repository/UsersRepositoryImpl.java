@@ -3,6 +3,7 @@ package com.example.meli.desafioSpring.desafioSpring.repository;
 import com.example.meli.desafioSpring.desafioSpring.DTO.UsersDTO;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
+import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -18,28 +19,51 @@ import java.util.stream.Collectors;
 @Repository
 public class UsersRepositoryImpl implements UsersRepository{
     @Override
-    public UsersDTO findById(Integer userId) throws DataBaseReadException {
-        List<UsersDTO> usersDTOSList = DataBaseRead();
+    public UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException {
+        List<UsersDTO> usersDTOSList = dataBaseRead();
         List<UsersDTO> userFound = new LinkedList<>();
 
         if(usersDTOSList.size() != 0) {
             userFound = usersDTOSList.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
+            if(userFound.size() == 0)
+                throw new UserNotFoundException("User not found.");
         } else {
-            throw new DataBaseReadException("Data base is null!");
+            throw new DataBaseReadException("Data base is null.");
         }
 
         return userFound.get(0);
     }
 
     @Override
-    public List<UsersDTO> findFollowers(Integer userId) {
-        return null;
+    public void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO followerDTO) throws DataBaseWriteException {
+        List<UsersDTO> dataBase = dataBaseRead();
+
+        List<UsersDTO> userFiltered = dataBase.stream()
+                .filter(user -> user.getUserId().equals(usersDTO.getUserId()))
+                .collect(Collectors.toList());
+        List<UsersDTO> followerFiltered = dataBase.stream()
+                .filter(follower -> follower.getUserId().equals(followerDTO.getUserId()))
+                .collect(Collectors.toList());
+
+        dataBase.remove(userFiltered.get(0));
+        dataBase.remove(followerFiltered.get(0));
+        dataBase.add(usersDTO);
+        dataBase.add(followerDTO);
+
+        dataBaseWrite(dataBase);
     }
 
     @Override
-    public void DataBaseWrite(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
+    public String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException {
+        List<UsersDTO> dataBase = dataBaseRead();
+
+        List<UsersDTO> filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
+
+        return filteredUser.get(0).getUserName();
+    }
+
+    private void dataBaseWrite(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<UsersDTO>> typeRef = new TypeReference<List<UsersDTO>>() { };
 
         try {
             objectMapper.writeValue(Paths.get("user.json").toFile(),usersDTOList);
@@ -48,8 +72,7 @@ public class UsersRepositoryImpl implements UsersRepository{
         }
     }
 
-
-    private List<UsersDTO> DataBaseRead() {
+    private List<UsersDTO> dataBaseRead() {
         File file = null;
 
         try {

@@ -1,3 +1,1 @@
-[{"userId":1,"userName":"FelipeGusmao","followers":null,"following":null,"publications":null,"seller":true},
-  {"userId":4,"userName":"ale","followers":null,"following":null,"publications":null,"seller":true}
-]
+[{"userId":1,"userName":"FelipeGusmao","followers":[{"userId":4,"userName":"teste"}],"following":[],"publications":null,"seller":true},{"userId":4,"userName":"teste","followers":[],"following":[{"userId":1,"userName":"FelipeGusmao"}],"publications":null,"seller":true}]

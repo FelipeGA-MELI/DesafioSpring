@@ -13,4 +13,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public void dbExceptionHandler(DataBaseReadException dataBaseReadException) {
         System.out.println(dataBaseReadException.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(UserNotFoundException.class)
+    public void userNotFoundHandler(UserNotFoundException userNotFoundException) {
+        System.out.println(userNotFoundException.getMessage());
+    }
 }

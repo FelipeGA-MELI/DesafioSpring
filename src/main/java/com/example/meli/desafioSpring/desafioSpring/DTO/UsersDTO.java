@@ -5,10 +5,22 @@ import java.util.List;
 public class UsersDTO {
     private Integer userId;
     private String userName;
-    private List<UsersDTO> followers;
-    private List<UsersDTO> following;
+    private List<FollowersDTO> followers;
+    private List<FollowersDTO> following;
     private PublicationsDTO publications;
     private Boolean isSeller;
+
+    public UsersDTO() {
+    }
+
+    public UsersDTO(UsersDTO usersDTO) {
+        this.userId = usersDTO.getUserId();
+        this.userName = usersDTO.getUserName();
+        this.followers = usersDTO.getFollowers();
+        this.following = usersDTO.getFollowing();
+        this.publications = usersDTO.getPublications();
+        this.isSeller = usersDTO.getSeller();
+    }
 
     public Integer getUserId() {
         return userId;
@@ -26,19 +38,19 @@ public class UsersDTO {
         this.userName = userName;
     }
 
-    public List<UsersDTO> getFollowers() {
+    public List<FollowersDTO> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<UsersDTO> followers) {
+    public void setFollowers(List<FollowersDTO> followers) {
         this.followers = followers;
     }
 
-    public List<UsersDTO> getFollowing() {
+    public List<FollowersDTO> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<UsersDTO> following) {
+    public void setFollowing(List<FollowersDTO> following) {
         this.following = following;
     }
 

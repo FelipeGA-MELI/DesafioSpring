@@ -4,9 +4,7 @@ public class FollowersDTO {
     private Integer userId;
     private String userName;
 
-    public Integer getUserId() {
-        return userId;
-    }
+    public Integer getUserId() { return userId; }
 
     public void setUserId(Integer userId) {
         this.userId = userId;
