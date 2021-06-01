@@ -1,11 +1,10 @@
 package com.example.meli.desafioSpring.desafioSpring.DTO;
 
-import java.util.Date;
 import java.util.List;
 
 public class PublicationsDTO {
     private Integer id_post;
-    private Date date;
+    private String date;
     private List<ProductsDTO> detail;
     private Integer category;
     private double price;
@@ -32,11 +31,11 @@ public class PublicationsDTO {
         this.id_post = id_post;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

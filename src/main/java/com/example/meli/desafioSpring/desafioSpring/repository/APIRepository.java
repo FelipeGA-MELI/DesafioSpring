@@ -6,11 +6,11 @@ import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteExcep
 import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 
 public interface APIRepository {
-    public UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException;
+    UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException;
 
-    public void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO follower) throws DataBaseWriteException, DataBaseReadException;
+    void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO follower) throws DataBaseWriteException, DataBaseReadException;
 
-    public String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException;
+    String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException;
 
-    public void createPublication(Integer userId,PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException;
+    void createPublication(Integer userId,PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException;
 }

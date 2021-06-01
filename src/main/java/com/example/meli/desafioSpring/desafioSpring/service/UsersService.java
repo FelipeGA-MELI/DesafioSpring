@@ -8,11 +8,11 @@ import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteExcep
 import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 
 public interface UsersService {
-    public void followSellerService(Integer userId, Integer userIdToFllow) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException;
+    void followSellerService(Integer userId, Integer userIdToFllow) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException;
 
-    public NumberOfFollowers getNumberFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException;
+    NumberOfFollowers getNumberFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException;
 
-    public AllFollowersDTO getFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException;
+    AllFollowersDTO getFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException;
 
-    public AllFollowingDTO getFollowedByService(Integer userId) throws UserNotFoundException, DataBaseReadException;
+    AllFollowingDTO getFollowedByService(Integer userId) throws UserNotFoundException, DataBaseReadException;
 }

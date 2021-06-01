@@ -21,25 +21,24 @@ import java.util.stream.Collectors;
 public class APIRepositoryImpl implements APIRepository {
     @Override
     public UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException {
-        List<UsersDTO> dataBaseRead = dataBaseRead();
-        List<UsersDTO> userFound;
+        List<UsersDTO> dataBase = dataBaseRead();
+        UsersDTO userFound;
 
-        if(dataBaseRead.size() != 0) {
-            userFound = dataBaseRead.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
-            if(userFound.size() == 0)
-                throw new UserNotFoundException("User not found.");
-        } else {
+        if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
-        }
 
-        return userFound.get(0);
+        userFound = dataBase.stream().filter(user -> user.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+
+        return userFound;
     }
 
     @Override
     public void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO followerDTO) throws DataBaseWriteException, DataBaseReadException {
         List<UsersDTO> dataBase = dataBaseRead();
 
-        if(dataBase.size() == 0)
+        if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null!");
 
         List<UsersDTO> userFiltered = dataBase.stream()
@@ -60,39 +59,37 @@ public class APIRepositoryImpl implements APIRepository {
     @Override
     public String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException {
         List<UsersDTO> dataBase = dataBaseRead();
-        List<UsersDTO> filteredUser;
+        UsersDTO filteredUser;
 
-        if(dataBase.size() != 0) {
-            filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
-            if(filteredUser.size() == 0)
-                throw new UserNotFoundException("User not found.");
-        } else {
+        if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
-        }
 
-        return filteredUser.get(0).getUserName();
+        filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+
+        return filteredUser.getUserName();
     }
 
     @Override
     public void createPublication(Integer userId, PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
         List<UsersDTO> dataBase = dataBaseRead();
-        List<UsersDTO> filteredUser;
         List<PublicationsDTO> publicationsDTOList;
+        UsersDTO filteredUser;
 
-        if(dataBase.size() != 0) {
-            filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
-            if(filteredUser.size() == 0)
-                throw new UserNotFoundException("User not found.");
-        } else {
+        if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
-        }
 
-        publicationsDTOList = filteredUser.get(0).getPublications();
+        filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+
+        publicationsDTOList = filteredUser.getPublications();
         publicationsDTOList.add(publication);
-        filteredUser.get(0).setPublications(publicationsDTOList);
+        filteredUser.setPublications(publicationsDTOList);
 
-        dataBase.remove(filteredUser.get(0));
-        dataBase.add(filteredUser.get(0));
+        dataBase.remove(filteredUser);
+        dataBase.add(filteredUser);
 
         dataBaseWrite(dataBase);
 

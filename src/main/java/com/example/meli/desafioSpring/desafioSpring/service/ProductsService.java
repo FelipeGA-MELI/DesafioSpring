@@ -6,5 +6,5 @@ import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteExcep
 import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 
 public interface ProductsService {
-    public void createPublicationService(PublicationWithUserIdDTO publication) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException;
+    void createPublicationService(PublicationWithUserIdDTO publication) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException;
 }

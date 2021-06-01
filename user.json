@@ -1,1 +1,66 @@
-[{"userId":4,"userName":"Maria","followers":[],"following":[{"userId":1,"userName":"FelipeGusmao"}],"publications":[{"id_post":18,"date":1617235200000,"detail":[{"product_id":1,"productName":"Cadeira Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"}],"category":100,"price":1500.5,"hasPromo":null,"discount":0.0}],"seller":true},{"userId":1,"userName":"Felipe Gusmao","followers":[{"userId":4,"userName":"teste"}],"following":[],"publications":[{"id_post":18,"date":1617235200000,"detail":[{"product_id":1,"productName":"Cadeira Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"}],"category":100,"price":1500.5,"hasPromo":null,"discount":0.0},{"id_post":18,"date":1617235200000,"detail":[{"product_id":2,"productName":"Notebook","type":"Gamer","brand":"Acer","color":"Black","notes":"Special Edition"}],"category":100,"price":1500.5,"hasPromo":null,"discount":0.0}],"seller":true}]
+[
+  {
+    "userId": 1,
+    "userName": "Felipe Gusmao",
+    "followers": [
+      {
+        "userId": 4,
+        "userName": "teste"
+      }
+    ],
+    "following": [],
+    "publications": [
+      {
+        "id_post": 24,
+        "date": "2021-04-01",
+        "detail": [
+          {
+            "product_id": 5,
+            "productName": "Carro",
+            "type": "Honda",
+            "brand": "Acer",
+            "color": "Black",
+            "notes": "Special Edition"
+          }
+        ],
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      }
+    ],
+    "seller": true
+  },
+  {
+    "userId": 4,
+    "userName": "Maria",
+    "followers": [],
+    "following": [
+      {
+        "userId": 1,
+        "userName": "FelipeGusmao"
+      }
+    ],
+    "publications": [
+      {
+        "id_post": 24,
+        "date": "2021-04-01",
+        "detail": [
+          {
+            "product_id": 9,
+            "productName": "Moto",
+            "type": "Honda",
+            "brand": "Acer",
+            "color": "Black",
+            "notes": "Special Edition"
+          }
+        ],
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      }
+    ],
+    "seller": true
+  }
+]
