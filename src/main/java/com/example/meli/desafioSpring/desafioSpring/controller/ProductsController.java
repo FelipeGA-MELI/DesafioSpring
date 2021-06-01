@@ -1,22 +1,25 @@
 package com.example.meli.desafioSpring.desafioSpring.controller;
 
+import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
+import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
+import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
+import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 import com.example.meli.desafioSpring.desafioSpring.service.ProductsService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
-    private ProductsService productsService;
+    private final ProductsService productsService;
 
     public ProductsController(ProductsService productsService) {
         this.productsService = productsService;
     }
 
-//    @PostMapping("/products/newpost")
-//    @ResponseStatus(HttpStatus.OK)
-//    public
+    @PostMapping("/newpost")
+    @ResponseStatus(HttpStatus.OK)
+    public void createPublication(@RequestBody PublicationWithUserIdDTO publicationWithUserIdDTO) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
+        productsService.createPublicationService(publicationWithUserIdDTO);
+    }
 }

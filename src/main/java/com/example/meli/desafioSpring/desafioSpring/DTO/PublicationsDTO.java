@@ -1,15 +1,28 @@
 package com.example.meli.desafioSpring.desafioSpring.DTO;
 
 import java.util.Date;
+import java.util.List;
 
 public class PublicationsDTO {
     private Integer id_post;
     private Date date;
-    private ProductsDTO detail;
+    private List<ProductsDTO> detail;
     private Integer category;
     private double price;
     private Boolean hasPromo;
     private double discount;
+
+    public PublicationsDTO() { }
+
+    public PublicationsDTO(PublicationWithUserIdDTO publicationWithUserIdDTO) {
+        this.id_post = publicationWithUserIdDTO.getId_post();
+        this.date = publicationWithUserIdDTO.getDate();
+        this.detail = publicationWithUserIdDTO.getDetail();
+        this.category = publicationWithUserIdDTO.getCategory();
+        this.price = publicationWithUserIdDTO.getPrice();
+        this.hasPromo = publicationWithUserIdDTO.getHasPromo();
+        this.discount = publicationWithUserIdDTO.getDiscount();
+    }
 
     public Integer getId_post() {
         return id_post;
@@ -27,11 +40,11 @@ public class PublicationsDTO {
         this.date = date;
     }
 
-    public ProductsDTO getDetail() {
+    public List<ProductsDTO> getDetail() {
         return detail;
     }
 
-    public void setDetail(ProductsDTO detail) {
+    public void setDetail(List<ProductsDTO> detail) {
         this.detail = detail;
     }
 

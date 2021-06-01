@@ -7,7 +7,7 @@ public class UsersDTO {
     private String userName;
     private List<FollowersDTO> followers;
     private List<FollowersDTO> following;
-    private PublicationsDTO publications;
+    private List<PublicationsDTO> publications;
     private Boolean isSeller;
 
     public UsersDTO() {
@@ -54,11 +54,11 @@ public class UsersDTO {
         this.following = following;
     }
 
-    public PublicationsDTO getPublications() {
+    public List<PublicationsDTO> getPublications() {
         return publications;
     }
 
-    public void setPublications(PublicationsDTO publications) {
+    public void setPublications(List<PublicationsDTO> publications) {
         this.publications = publications;
     }
 
