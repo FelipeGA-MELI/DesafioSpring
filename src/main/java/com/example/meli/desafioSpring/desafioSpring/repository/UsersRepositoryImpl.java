@@ -10,6 +10,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 public class UsersRepositoryImpl implements UsersRepository{
     @Override
     public UsersDTO findById(Integer userId) throws DataBaseReadException {
-        List<UsersDTO> usersDTOSList = UsersDataBaseRead();
-        List<UsersDTO> userFound;
+        List<UsersDTO> usersDTOSList = DataBaseRead();
+        List<UsersDTO> userFound = new LinkedList<>();
 
         if(usersDTOSList.size() != 0) {
             userFound = usersDTOSList.stream().filter(user -> user.getUserId().equals(userId)).collect(Collectors.toList());
@@ -36,23 +37,23 @@ public class UsersRepositoryImpl implements UsersRepository{
     }
 
     @Override
-    public void writeToDataBase(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
+    public void DataBaseWrite(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
         ObjectMapper objectMapper = new ObjectMapper();
         TypeReference<List<UsersDTO>> typeRef = new TypeReference<List<UsersDTO>>() { };
 
         try {
-            objectMapper.writeValue(new File("classpath:users.json"),usersDTOList);
+            objectMapper.writeValue(Paths.get("user.json").toFile(),usersDTOList);
         } catch (IOException e) {
             throw new DataBaseWriteException("Couldnt write to database.");
         }
     }
 
 
-    private List<UsersDTO> UsersDataBaseRead() {
+    private List<UsersDTO> DataBaseRead() {
         File file = null;
 
         try {
-            file = ResourceUtils.getFile("classpath:users.json");
+            file = ResourceUtils.getFile("/Users/fgusmao/Downloads/desafioSpring/user.json");
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }

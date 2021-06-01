@@ -18,24 +18,24 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public void followSellerService(Integer userId, Integer userIdToFllow) throws DataBaseReadException {
-       // UsersDTO user = usersRepository.findById(userId);
-      //  UsersDTO follower = usersRepository.findById(userIdToFllow);
+        UsersDTO user = usersRepository.findById(userId);
+        UsersDTO follower = usersRepository.findById(userIdToFllow);
 
-        UsersDTO usersDTO = new UsersDTO();
-        usersDTO.setUserId(1);
-        usersDTO.setUserName("Felipe");
-        usersDTO.setFollowers(null);
-        usersDTO.setSeller(true);
-        usersDTO.setFollowing(null);
-
-        List<UsersDTO> usersDTOList = new LinkedList<>();
-        usersDTOList.add(usersDTO);
-
-        try {
-            usersRepository.writeToDataBase(usersDTOList);
-        } catch (DataBaseWriteException e) {
-            e.printStackTrace();
-        }
+//        UsersDTO usersDTO = new UsersDTO();
+//        usersDTO.setUserId(1);
+//        usersDTO.setUserName("FelipeGusmao");
+//        usersDTO.setFollowers(null);
+//        usersDTO.setSeller(true);
+//        usersDTO.setFollowing(null);
+//
+//        List<UsersDTO> usersDTOList = new LinkedList<>();
+//        usersDTOList.add(usersDTO);
+//
+//        try {
+//            usersRepository.writeToDataBase(usersDTOList);
+//        } catch (DataBaseWriteException e) {
+//            e.printStackTrace();
+//        }
     }
 
 

@@ -11,5 +11,5 @@ public interface UsersRepository {
 
     public List<UsersDTO> findFollowers(Integer userId);
 
-    public void writeToDataBase(List<UsersDTO> usersDTO) throws DataBaseWriteException;
+    public void DataBaseWrite(List<UsersDTO> usersDTO) throws DataBaseWriteException;
 }
