@@ -10,7 +10,7 @@ import java.util.List;
 public interface APIRepository {
     UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException;
 
-    void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO follower) throws DataBaseWriteException, DataBaseReadException;
+    void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException;
 
     String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException;
 

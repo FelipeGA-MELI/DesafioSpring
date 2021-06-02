@@ -10,41 +10,41 @@ import java.util.List;
 
 @Service
 public class UsersServiceImpl implements UsersService{
-    private final APIRepository APIRepository;
+    private final APIRepository apiRepository;
 
-    public UsersServiceImpl(APIRepository APIRepository) {
-        this.APIRepository = APIRepository;
+    public UsersServiceImpl(APIRepository apiRepository) {
+        this.apiRepository = apiRepository;
     }
 
     @Override
     public void followSellerService(Integer userIdToFollow, Integer userId) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
-        UsersDTO user = APIRepository.findById(userId);
-        UsersDTO follower = APIRepository.findById(userIdToFollow);
+        UsersDTO user = apiRepository.findById(userId);
+        UsersDTO userToFollow = apiRepository.findById(userIdToFollow);
 
         List<FollowersDTO> followersDTOList = user.getFollowers();
         FollowersDTO followersDTO = new FollowersDTO();
-        followersDTO.setUserId(follower.getUserId());
-        followersDTO.setUserName(follower.getUserName());
+        followersDTO.setUserId(userToFollow.getUserId());
+        followersDTO.setUserName(userToFollow.getUserName());
 
         followersDTOList.add(followersDTO);
 
         user.setFollowers(followersDTOList);
 
-        List<FollowersDTO> followingDTOList = follower.getFollowing();
+        List<FollowersDTO> followingDTOList = userToFollow.getFollowing();
         FollowersDTO followingDTO = new FollowersDTO();
         followingDTO.setUserId(user.getUserId());
         followingDTO.setUserName(user.getUserName());
 
         followingDTOList.add(followingDTO);
 
-        follower.setFollowing(followingDTOList);
+        userToFollow.setFollowing(followingDTOList);
 
-        APIRepository.saveFollowersToDataBase(user,follower);
+        apiRepository.setFollower(user,userToFollow);
     }
 
     @Override
     public NumberOfFollowers getNumberFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException {
-        UsersDTO user = APIRepository.findById(userId);
+        UsersDTO user = apiRepository.findById(userId);
         Integer followersCount = user.getFollowers().size();
 
         NumberOfFollowers numberOfFollowers = new NumberOfFollowers();
@@ -57,7 +57,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public AllFollowersDTO getFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException{
-        UsersDTO user = APIRepository.findById(userId);
+        UsersDTO user = apiRepository.findById(userId);
         AllFollowersDTO allFollowersDTO = new AllFollowersDTO();
 
         allFollowersDTO.setUserId(userId);
@@ -69,7 +69,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public AllFollowingDTO getFollowedByService(Integer userId) throws UserNotFoundException, DataBaseReadException {
-        UsersDTO user = APIRepository.findById(userId);
+        UsersDTO user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
         allFollowingDTO.setUserId(userId);
@@ -79,5 +79,19 @@ public class UsersServiceImpl implements UsersService{
         return allFollowingDTO;
     }
 
+    @Override
+    public void unfollowSellerService(Integer userId, Integer userIdToUnfollow) throws UserNotFoundException, DataBaseReadException, DataBaseWriteException {
+        UsersDTO user = apiRepository.findById(userId);
+        UsersDTO userToUnfollow = apiRepository.findById(userIdToUnfollow);
 
+        List<FollowersDTO> followingDTOList = user.getFollowing();
+        followingDTOList.removeIf(userRem -> userRem.getUserId().equals(userIdToUnfollow));
+        user.setFollowing(followingDTOList);
+
+        List<FollowersDTO> followersDTOList = userToUnfollow.getFollowers();
+        followersDTOList.removeIf(usrUnFollowRem -> usrUnFollowRem.getUserId().equals(userId));
+        userToUnfollow.setFollowers(followersDTOList);
+
+        apiRepository.setFollower(user,userToUnfollow);
+    }
 }

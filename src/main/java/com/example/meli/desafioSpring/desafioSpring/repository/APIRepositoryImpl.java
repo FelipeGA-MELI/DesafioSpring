@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class APIRepositoryImpl implements APIRepository {
@@ -35,21 +34,23 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO followerDTO) throws DataBaseWriteException, DataBaseReadException {
+    public void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException {
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null!");
+            throw new DataBaseReadException("Data base is null.");
 
-        List<UsersDTO> userFiltered = dataBase.stream()
+        UsersDTO userFiltered = dataBase.stream()
                 .filter(user -> user.getUserId().equals(usersDTO.getUserId()))
-                .collect(Collectors.toList());
-        List<UsersDTO> followerFiltered = dataBase.stream()
-                .filter(follower -> follower.getUserId().equals(followerDTO.getUserId()))
-                .collect(Collectors.toList());
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+        UsersDTO userToFollowFiltered = dataBase.stream()
+                .filter(follower -> follower.getUserId().equals(userToFollow.getUserId()))
+                .findFirst()
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
 
-        dataBase.remove(userFiltered.get(0));
-        dataBase.remove(followerFiltered.get(0));
+        dataBase.remove(userFiltered);
+        dataBase.remove(userToFollowFiltered);
         dataBase.add(usersDTO);
-        dataBase.add(followerDTO);
+        dataBase.add(userToFollow);
 
         dataBaseWrite(dataBase);
     }

@@ -15,4 +15,6 @@ public interface UsersService {
     AllFollowersDTO getFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException;
 
     AllFollowingDTO getFollowedByService(Integer userId) throws UserNotFoundException, DataBaseReadException;
+
+    void unfollowSellerService(Integer userId, Integer userIdToUnfollow) throws UserNotFoundException, DataBaseReadException, DataBaseWriteException;
 }

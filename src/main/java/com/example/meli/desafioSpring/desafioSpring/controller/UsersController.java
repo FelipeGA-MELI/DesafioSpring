@@ -40,4 +40,10 @@ public class UsersController {
     public ResponseEntity<AllFollowingDTO> getFollowedBy(@PathVariable Integer userId) throws DataBaseReadException, UserNotFoundException {
         return new ResponseEntity<>(usersService.getFollowedByService(userId),HttpStatus.OK);
     }
+
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    @ResponseStatus(HttpStatus.OK)
+    public void UnfollowSeller(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) throws DataBaseReadException, UserNotFoundException, DataBaseWriteException {
+        usersService.unfollowSellerService(userId,userIdToUnfollow);
+    }
 }
