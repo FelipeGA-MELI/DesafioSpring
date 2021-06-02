@@ -17,9 +17,9 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void followSellerService(Integer userId, Integer userIdToFllow) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
+    public void followSellerService(Integer userIdToFollow, Integer userId) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
         UsersDTO user = APIRepository.findById(userId);
-        UsersDTO follower = APIRepository.findById(userIdToFllow);
+        UsersDTO follower = APIRepository.findById(userIdToFollow);
 
         List<FollowersDTO> followersDTOList = user.getFollowers();
         FollowersDTO followersDTO = new FollowersDTO();

@@ -1,7 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.repository;
 
-import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsDTO;
-import com.example.meli.desafioSpring.desafioSpring.DTO.UsersDTO;
+import com.example.meli.desafioSpring.desafioSpring.DTO.*;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
 import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
@@ -93,6 +92,13 @@ public class APIRepositoryImpl implements APIRepository {
 
         dataBaseWrite(dataBase);
 
+    }
+
+    @Override
+    public List<PublicationsDTO> getAllPublicationsByUserId(Integer userId) throws DataBaseReadException, UserNotFoundException {
+        UsersDTO filteredUser = findById(userId);
+
+        return filteredUser.getPublications();
     }
 
     private void dataBaseWrite(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
