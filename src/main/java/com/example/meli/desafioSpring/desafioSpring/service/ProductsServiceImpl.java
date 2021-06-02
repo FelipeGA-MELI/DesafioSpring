@@ -8,14 +8,19 @@ import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsServiceImpl implements ProductsService{
     private final APIRepository apiRepository;
     private final UsersService usersService;
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     public ProductsServiceImpl(UsersService usersService, APIRepository apiRepository) {
         this.apiRepository = apiRepository;
@@ -41,30 +46,46 @@ public class ProductsServiceImpl implements ProductsService{
 
         sortPublicationsByDate(publicationsDTOList);
 
+        List<PublicationsDTO> publicationsFilteredByDate = publicationsDTOList
+                .stream().filter(publication -> getWeeksDifference(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),publication.getDate()) < 3 )
+                .collect(Collectors.toList());
+
         publicationsByUserDTO.setUserId(userId);
-        publicationsByUserDTO.setPosts(publicationsDTOList);
+        publicationsByUserDTO.setPosts(publicationsFilteredByDate);
 
         return publicationsByUserDTO;
     }
 
     private void sortPublicationsByDate(List<PublicationsDTO> publications) {
-      publications.sort(new Comparator<>() {
-          private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
-          @Override
-          public int compare(PublicationsDTO o1, PublicationsDTO o2) {
-              try {
-                  if (formatter.parse(o1.getDate()).compareTo(formatter.parse(o2.getDate())) < 0) {
-                      return -1;
-                  } else {
-                      return 1;
-                  }
-              } catch (ParseException e) {
-                  e.printStackTrace();
+      publications.sort((o1, o2) -> {
+          try {
+              if (formatter.parse(o1.getDate()).compareTo(formatter.parse(o2.getDate())) < 0) {
+                  return -1;
+              } else {
+                  return 1;
               }
-
-              return 0;
+          } catch (ParseException e) {
+              e.printStackTrace();
           }
+
+          return 0;
       });
+    }
+
+    private long getWeeksDifference(String date1, String date2) {
+        Date firstDate = new Date();
+        Date secondDate = new Date();
+
+        try {
+            firstDate = formatter.parse(date1);
+            secondDate = formatter.parse(date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diffInWeeks = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)/7;
+
+        return diffInWeeks;
     }
 }

@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 
 @Repository
 public class APIRepositoryImpl implements APIRepository {
+    List<UsersDTO> dataBase = dataBaseRead();
+
     @Override
     public UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException {
-        List<UsersDTO> dataBase = dataBaseRead();
         UsersDTO userFound;
 
         if(dataBase.isEmpty())
@@ -35,8 +36,6 @@ public class APIRepositoryImpl implements APIRepository {
 
     @Override
     public void saveFollowersToDataBase(UsersDTO usersDTO, UsersDTO followerDTO) throws DataBaseWriteException, DataBaseReadException {
-        List<UsersDTO> dataBase = dataBaseRead();
-
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null!");
 
@@ -57,7 +56,6 @@ public class APIRepositoryImpl implements APIRepository {
 
     @Override
     public String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException {
-        List<UsersDTO> dataBase = dataBaseRead();
         UsersDTO filteredUser;
 
         if(dataBase.isEmpty())
@@ -72,7 +70,6 @@ public class APIRepositoryImpl implements APIRepository {
 
     @Override
     public void createPublication(Integer userId, PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
-        List<UsersDTO> dataBase = dataBaseRead();
         List<PublicationsDTO> publicationsDTOList;
         UsersDTO filteredUser;
 
