@@ -2,7 +2,10 @@ package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
+import com.example.meli.desafioSpring.desafioSpring.sort.SortFollowersByName;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -53,23 +56,31 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public AllFollowersDTO getFollowersService(Integer userId) {
+    public AllFollowersDTO getFollowersService(Integer userId, String order) {
         UsersDTO user = apiRepository.findById(userId);
         AllFollowersDTO allFollowersDTO = new AllFollowersDTO();
 
-        allFollowersDTO.setUserId(userId);
+        List<FollowersDTO> followers = user.getFollowers();
+
+        if(order.equals("name_asc")) {
+            followers.sort(new SortFollowersByName());
+        } else {
+            followers.sort(new SortFollowersByName().reversed());
+        }
+
+        allFollowersDTO.setUserId(user.getUserId());
         allFollowersDTO.setUserName(user.getUserName());
-        allFollowersDTO.setFollowers(user.getFollowers());
+        allFollowersDTO.setFollowers(followers);
 
         return allFollowersDTO;
     }
 
     @Override
-    public AllFollowingDTO getFollowedByService(Integer userId) {
+    public AllFollowingDTO getFollowedByService(Integer userId, String order) {
         UsersDTO user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
-        allFollowingDTO.setUserId(userId);
+        allFollowingDTO.setUserId(user.getUserId());
         allFollowingDTO.setUserName(user.getUserName());
         allFollowingDTO.setFollowing(user.getFollowing());
 

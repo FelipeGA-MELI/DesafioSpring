@@ -9,9 +9,9 @@ public interface UsersService {
 
     NumberOfFollowers getNumberFollowersService(Integer userId);
 
-    AllFollowersDTO getFollowersService(Integer userId);
+    AllFollowersDTO getFollowersService(Integer userId, String order);
 
-    AllFollowingDTO getFollowedByService(Integer userId);
+    AllFollowingDTO getFollowedByService(Integer userId, String order);
 
     void unfollowSellerService(Integer userId, Integer userIdToUnfollow);
 }

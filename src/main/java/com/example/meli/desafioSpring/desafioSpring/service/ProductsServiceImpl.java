@@ -34,7 +34,7 @@ public class ProductsServiceImpl implements ProductsService{
 
     @Override
     public PublicationsByUserDTO getPublicationsByUserService(Integer userId) {
-        List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId).getFollowing();
+        List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId,"name_asc").getFollowing();
         List<PublicationsDTO> publicationsDTOList = new LinkedList<>();
         PublicationsByUserDTO publicationsByUserDTO = new PublicationsByUserDTO();
 

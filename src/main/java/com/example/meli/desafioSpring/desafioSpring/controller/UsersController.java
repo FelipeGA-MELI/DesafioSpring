@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UsersController {
     private final UsersService usersService;
+    private final static String DEFAULT_ORDER = "name_asc";
 
     public UsersController(UsersService usersService) {
         this.usersService = usersService;
@@ -29,13 +30,13 @@ public class UsersController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<AllFollowersDTO> getFollowers(@PathVariable Integer userId) {
-        return new ResponseEntity<>(usersService.getFollowersService(userId),HttpStatus.OK);
+    public ResponseEntity<AllFollowersDTO> getFollowers(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
+        return new ResponseEntity<>(usersService.getFollowersService(userId,order),HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<AllFollowingDTO> getFollowedBy(@PathVariable Integer userId) {
-        return new ResponseEntity<>(usersService.getFollowedByService(userId),HttpStatus.OK);
+    public ResponseEntity<AllFollowingDTO> getFollowedBy(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
+        return new ResponseEntity<>(usersService.getFollowedByService(userId,order),HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
