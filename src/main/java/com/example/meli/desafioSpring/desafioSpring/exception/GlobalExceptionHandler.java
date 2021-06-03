@@ -10,8 +10,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(DataBaseReadException.class)
-    public void dbExceptionHandler(DataBaseReadException dataBaseReadException) {
+    public void dbReadExceptionHandler(DataBaseReadException dataBaseReadException) {
         System.out.println(dataBaseReadException.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DataBaseWriteException.class)
+    public void dbWriteExceptionHandler(DataBaseWriteException dataBaseWriteException) {
+        System.out.println(dataBaseWriteException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

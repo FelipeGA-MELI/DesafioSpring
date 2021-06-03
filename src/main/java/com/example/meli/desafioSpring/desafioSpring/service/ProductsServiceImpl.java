@@ -1,6 +1,7 @@
 package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
+import com.example.meli.desafioSpring.desafioSpring.model.Publications;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import com.example.meli.desafioSpring.desafioSpring.sort.SortPublicationsByDate;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class ProductsServiceImpl implements ProductsService{
 
     @Override
     public void createPublicationService(PublicationWithUserIdDTO publication) {
-        PublicationsDTO publicationDTO = new PublicationsDTO(publication);
+        Publications publicationDTO = new Publications(publication);
         Integer userId = publication.getUserId();
 
         apiRepository.createPublication(userId,publicationDTO);
@@ -36,19 +37,19 @@ public class ProductsServiceImpl implements ProductsService{
     @Override
     public PublicationsByUserDTO getPublicationsByUserService(Integer userId, String order) {
         List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId,"name_asc").getFollowing();
-        List<PublicationsDTO> publicationsDTOList = new LinkedList<>();
+        List<Publications> publicationsList = new LinkedList<>();
         PublicationsByUserDTO publicationsByUserDTO = new PublicationsByUserDTO();
 
         for(FollowersDTO following: followingDTOList)
-            publicationsDTOList.addAll(apiRepository.getAllPublicationsByUserId(following.getUserId()));
+            publicationsList.addAll(apiRepository.getAllPublicationsByUserId(following.getUserId()));
 
         if(order.equals("date_asc")) {
-            publicationsDTOList.sort(new SortPublicationsByDate());
+            publicationsList.sort(new SortPublicationsByDate());
         } else {
-            publicationsDTOList.sort(new SortPublicationsByDate().reversed());
+            publicationsList.sort(new SortPublicationsByDate().reversed());
         }
 
-        List<PublicationsDTO> publicationsFilteredByDate = publicationsDTOList
+        List<Publications> publicationsFilteredByDate = publicationsList
                 .stream().filter(publication -> getWeeksDifference(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),publication.getDate()) < 3 )
                 .collect(Collectors.toList());
 

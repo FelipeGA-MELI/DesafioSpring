@@ -1,20 +1,17 @@
 package com.example.meli.desafioSpring.desafioSpring.repository;
-import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsDTO;
-import com.example.meli.desafioSpring.desafioSpring.DTO.UsersDTO;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
-import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
+import com.example.meli.desafioSpring.desafioSpring.model.Publications;
+import com.example.meli.desafioSpring.desafioSpring.model.Users;
 
 import java.util.List;
 
 public interface APIRepository {
-    UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException;
+    Users findById(Integer userId);
 
-    void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException;
+    void setFollower(Users users, Users userToFollow);
 
-    String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException;
+    String findUserNameById(Integer userId);
 
-    void createPublication(Integer userId, PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException;
+    void createPublication(Integer userId, Publications publication);
 
-    List<PublicationsDTO> getAllPublicationsByUserId(Integer userId) throws DataBaseReadException, UserNotFoundException;
+    List<Publications> getAllPublicationsByUserId(Integer userId);
 }

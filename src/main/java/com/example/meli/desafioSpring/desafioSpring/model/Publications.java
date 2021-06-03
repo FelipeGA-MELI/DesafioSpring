@@ -1,19 +1,21 @@
-package com.example.meli.desafioSpring.desafioSpring.DTO;
+package com.example.meli.desafioSpring.desafioSpring.model;
+
+import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
 
 import java.util.List;
 
-public class PublicationsDTO {
+public class Publications {
     private Integer id_post;
     private String date;
-    private List<ProductsDTO> detail;
+    private List<Products> detail;
     private Integer category;
     private double price;
     private Boolean hasPromo;
     private double discount;
 
-    public PublicationsDTO() { }
+    public Publications() { }
 
-    public PublicationsDTO(PublicationWithUserIdDTO publicationWithUserIdDTO) {
+    public Publications(PublicationWithUserIdDTO publicationWithUserIdDTO) {
         this.id_post = publicationWithUserIdDTO.getId_post();
         this.date = publicationWithUserIdDTO.getDate();
         this.detail = publicationWithUserIdDTO.getDetail();
@@ -39,11 +41,11 @@ public class PublicationsDTO {
         this.date = date;
     }
 
-    public List<ProductsDTO> getDetail() {
+    public List<Products> getDetail() {
         return detail;
     }
 
-    public void setDetail(List<ProductsDTO> detail) {
+    public void setDetail(List<Products> detail) {
         this.detail = detail;
     }
 

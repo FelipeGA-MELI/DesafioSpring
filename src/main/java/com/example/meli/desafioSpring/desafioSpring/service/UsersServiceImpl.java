@@ -1,11 +1,11 @@
 package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
+import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import com.example.meli.desafioSpring.desafioSpring.sort.SortFollowersByName;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -18,8 +18,8 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public void followSellerService(Integer userIdToFollow, Integer userId) {
-        UsersDTO user = apiRepository.findById(userId);
-        UsersDTO userToFollow = apiRepository.findById(userIdToFollow);
+        Users user = apiRepository.findById(userId);
+        Users userToFollow = apiRepository.findById(userIdToFollow);
 
         List<FollowersDTO> followersDTOList = user.getFollowers();
         FollowersDTO followersDTO = new FollowersDTO();
@@ -44,7 +44,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public NumberOfFollowers getNumberFollowersService(Integer userId) {
-        UsersDTO user = apiRepository.findById(userId);
+        Users user = apiRepository.findById(userId);
         Integer followersCount = user.getFollowers().size();
 
         NumberOfFollowers numberOfFollowers = new NumberOfFollowers();
@@ -57,7 +57,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public AllFollowersDTO getFollowersService(Integer userId, String order) {
-        UsersDTO user = apiRepository.findById(userId);
+        Users user = apiRepository.findById(userId);
         AllFollowersDTO allFollowersDTO = new AllFollowersDTO();
 
         List<FollowersDTO> followers = user.getFollowers();
@@ -77,7 +77,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public AllFollowingDTO getFollowedByService(Integer userId, String order) {
-        UsersDTO user = apiRepository.findById(userId);
+        Users user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
         List<FollowersDTO> following = user.getFollowing();
@@ -97,8 +97,8 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public void unfollowSellerService(Integer userId, Integer userIdToUnfollow) {
-        UsersDTO user = apiRepository.findById(userId);
-        UsersDTO userToUnfollow = apiRepository.findById(userIdToUnfollow);
+        Users user = apiRepository.findById(userId);
+        Users userToUnfollow = apiRepository.findById(userIdToUnfollow);
 
         List<FollowersDTO> followingDTOList = user.getFollowing();
         followingDTOList.removeIf(userRem -> userRem.getUserId().equals(userIdToUnfollow));

@@ -1,25 +1,27 @@
-package com.example.meli.desafioSpring.desafioSpring.DTO;
+package com.example.meli.desafioSpring.desafioSpring.model;
+
+import com.example.meli.desafioSpring.desafioSpring.DTO.FollowersDTO;
 
 import java.util.List;
 
-public class UsersDTO {
+public class Users {
     private Integer userId;
     private String userName;
     private List<FollowersDTO> followers;
     private List<FollowersDTO> following;
-    private List<PublicationsDTO> publications;
+    private List<Publications> publications;
     private Boolean isSeller;
 
-    public UsersDTO() {
+    public Users() {
     }
 
-    public UsersDTO(UsersDTO usersDTO) {
-        this.userId = usersDTO.getUserId();
-        this.userName = usersDTO.getUserName();
-        this.followers = usersDTO.getFollowers();
-        this.following = usersDTO.getFollowing();
-        this.publications = usersDTO.getPublications();
-        this.isSeller = usersDTO.getSeller();
+    public Users(Users users) {
+        this.userId = users.getUserId();
+        this.userName = users.getUserName();
+        this.followers = users.getFollowers();
+        this.following = users.getFollowing();
+        this.publications = users.getPublications();
+        this.isSeller = users.getSeller();
     }
 
     public Integer getUserId() {
@@ -54,11 +56,11 @@ public class UsersDTO {
         this.following = following;
     }
 
-    public List<PublicationsDTO> getPublications() {
+    public List<Publications> getPublications() {
         return publications;
     }
 
-    public void setPublications(List<PublicationsDTO> publications) {
+    public void setPublications(List<Publications> publications) {
         this.publications = publications;
     }
 

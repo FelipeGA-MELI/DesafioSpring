@@ -1,6 +1,6 @@
-package com.example.meli.desafioSpring.desafioSpring.DTO;
+package com.example.meli.desafioSpring.desafioSpring.model;
 
-public class ProductsDTO {
+public class Products {
     private Integer product_id;
     private String productName;
     private String type;

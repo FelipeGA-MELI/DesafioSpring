@@ -1,6 +1,8 @@
 package com.example.meli.desafioSpring.desafioSpring.DTO;
 
-public class PublicationWithUserIdDTO extends PublicationsDTO {
+import com.example.meli.desafioSpring.desafioSpring.model.Publications;
+
+public class PublicationWithUserIdDTO extends Publications {
     private Integer userId;
 
     public Integer getUserId() {

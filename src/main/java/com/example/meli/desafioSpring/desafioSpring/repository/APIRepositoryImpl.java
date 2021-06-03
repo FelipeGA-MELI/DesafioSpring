@@ -1,9 +1,10 @@
 package com.example.meli.desafioSpring.desafioSpring.repository;
 
-import com.example.meli.desafioSpring.desafioSpring.DTO.*;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
 import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
 import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
+import com.example.meli.desafioSpring.desafioSpring.model.Publications;
+import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -17,11 +18,11 @@ import java.util.List;
 
 @Repository
 public class APIRepositoryImpl implements APIRepository {
-    List<UsersDTO> dataBase = dataBaseRead();
+    List<Users> dataBase = dataBaseRead();
 
     @Override
-    public UsersDTO findById(Integer userId) {
-        UsersDTO userFound;
+    public Users findById(Integer userId) {
+        Users userFound;
 
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
@@ -34,22 +35,22 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) {
+    public void setFollower(Users users, Users userToFollow) {
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
 
-        UsersDTO userFiltered = dataBase.stream()
-                .filter(user -> user.getUserId().equals(usersDTO.getUserId()))
+        Users userFiltered = dataBase.stream()
+                .filter(user -> user.getUserId().equals(users.getUserId()))
                 .findFirst()
                 .orElseThrow(() -> new UserNotFoundException("User not found."));
-        UsersDTO userToFollowFiltered = dataBase.stream()
+        Users userToFollowFiltered = dataBase.stream()
                 .filter(follower -> follower.getUserId().equals(userToFollow.getUserId()))
                 .findFirst()
                 .orElseThrow(() -> new UserNotFoundException("User not found."));
 
         dataBase.remove(userFiltered);
         dataBase.remove(userToFollowFiltered);
-        dataBase.add(usersDTO);
+        dataBase.add(users);
         dataBase.add(userToFollow);
 
         dataBaseWrite(dataBase);
@@ -57,7 +58,7 @@ public class APIRepositoryImpl implements APIRepository {
 
     @Override
     public String findUserNameById(Integer userId) {
-        UsersDTO filteredUser;
+        Users filteredUser;
 
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
@@ -70,9 +71,9 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public void createPublication(Integer userId, PublicationsDTO publication) {
-        List<PublicationsDTO> publicationsDTOList;
-        UsersDTO filteredUser;
+    public void createPublication(Integer userId, Publications publication) {
+        List<Publications> publicationsList;
+        Users filteredUser;
 
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
@@ -81,9 +82,9 @@ public class APIRepositoryImpl implements APIRepository {
                 .findFirst()
                 .orElseThrow(() -> new UserNotFoundException("User not found."));
 
-        publicationsDTOList = filteredUser.getPublications();
-        publicationsDTOList.add(publication);
-        filteredUser.setPublications(publicationsDTOList);
+        publicationsList = filteredUser.getPublications();
+        publicationsList.add(publication);
+        filteredUser.setPublications(publicationsList);
 
         dataBase.remove(filteredUser);
         dataBase.add(filteredUser);
@@ -93,23 +94,23 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public List<PublicationsDTO> getAllPublicationsByUserId(Integer userId) {
-        UsersDTO filteredUser = findById(userId);
+    public List<Publications> getAllPublicationsByUserId(Integer userId) {
+        Users filteredUser = findById(userId);
 
         return filteredUser.getPublications();
     }
 
-    private void dataBaseWrite(List<UsersDTO> usersDTOList) throws DataBaseWriteException {
+    private void dataBaseWrite(List<Users> usersList) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            objectMapper.writeValue(Paths.get("user.json").toFile(),usersDTOList);
+            objectMapper.writeValue(Paths.get("user.json").toFile(), usersList);
         } catch (IOException e) {
             throw new DataBaseWriteException("Couldnt write to database.");
         }
     }
 
-    private List<UsersDTO> dataBaseRead() {
+    private List<Users> dataBaseRead() {
         File file = null;
 
         try {
@@ -119,15 +120,15 @@ public class APIRepositoryImpl implements APIRepository {
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<UsersDTO>> typeRef = new TypeReference<>() { };
-        List<UsersDTO> usersDTOList = new LinkedList<>();
+        TypeReference<List<Users>> typeRef = new TypeReference<>() { };
+        List<Users> usersList = new LinkedList<>();
 
         try {
-            usersDTOList = objectMapper.readValue(file,typeRef);
+            usersList = objectMapper.readValue(file,typeRef);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return usersDTOList;
+        return usersList;
     }
 }
