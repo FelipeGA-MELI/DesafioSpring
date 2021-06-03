@@ -20,7 +20,7 @@ public class APIRepositoryImpl implements APIRepository {
     List<UsersDTO> dataBase = dataBaseRead();
 
     @Override
-    public UsersDTO findById(Integer userId) throws DataBaseReadException, UserNotFoundException {
+    public UsersDTO findById(Integer userId) {
         UsersDTO userFound;
 
         if(dataBase.isEmpty())
@@ -34,7 +34,7 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException {
+    public void setFollower(UsersDTO usersDTO, UsersDTO userToFollow) {
         if(dataBase.isEmpty())
             throw new DataBaseReadException("Data base is null.");
 
@@ -56,7 +56,7 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public String findUserNameById(Integer userId) throws DataBaseReadException, UserNotFoundException {
+    public String findUserNameById(Integer userId) {
         UsersDTO filteredUser;
 
         if(dataBase.isEmpty())
@@ -70,7 +70,7 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public void createPublication(Integer userId, PublicationsDTO publication) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
+    public void createPublication(Integer userId, PublicationsDTO publication) {
         List<PublicationsDTO> publicationsDTOList;
         UsersDTO filteredUser;
 
@@ -93,7 +93,7 @@ public class APIRepositoryImpl implements APIRepository {
     }
 
     @Override
-    public List<PublicationsDTO> getAllPublicationsByUserId(Integer userId) throws DataBaseReadException, UserNotFoundException {
+    public List<PublicationsDTO> getAllPublicationsByUserId(Integer userId) {
         UsersDTO filteredUser = findById(userId);
 
         return filteredUser.getPublications();

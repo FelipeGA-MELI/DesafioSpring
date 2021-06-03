@@ -1,9 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
-import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,7 +14,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void followSellerService(Integer userIdToFollow, Integer userId) throws DataBaseReadException, DataBaseWriteException, UserNotFoundException {
+    public void followSellerService(Integer userIdToFollow, Integer userId) {
         UsersDTO user = apiRepository.findById(userId);
         UsersDTO userToFollow = apiRepository.findById(userIdToFollow);
 
@@ -43,7 +40,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public NumberOfFollowers getNumberFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException {
+    public NumberOfFollowers getNumberFollowersService(Integer userId) {
         UsersDTO user = apiRepository.findById(userId);
         Integer followersCount = user.getFollowers().size();
 
@@ -56,7 +53,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public AllFollowersDTO getFollowersService(Integer userId) throws UserNotFoundException, DataBaseReadException{
+    public AllFollowersDTO getFollowersService(Integer userId) {
         UsersDTO user = apiRepository.findById(userId);
         AllFollowersDTO allFollowersDTO = new AllFollowersDTO();
 
@@ -68,7 +65,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public AllFollowingDTO getFollowedByService(Integer userId) throws UserNotFoundException, DataBaseReadException {
+    public AllFollowingDTO getFollowedByService(Integer userId) {
         UsersDTO user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
@@ -80,7 +77,7 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public void unfollowSellerService(Integer userId, Integer userIdToUnfollow) throws UserNotFoundException, DataBaseReadException, DataBaseWriteException {
+    public void unfollowSellerService(Integer userId, Integer userIdToUnfollow) {
         UsersDTO user = apiRepository.findById(userId);
         UsersDTO userToUnfollow = apiRepository.findById(userIdToUnfollow);
 

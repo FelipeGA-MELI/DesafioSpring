@@ -1,9 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseReadException;
-import com.example.meli.desafioSpring.desafioSpring.exception.DataBaseWriteException;
-import com.example.meli.desafioSpring.desafioSpring.exception.UserNotFoundException;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
@@ -28,7 +25,7 @@ public class ProductsServiceImpl implements ProductsService{
     }
 
     @Override
-    public void createPublicationService(PublicationWithUserIdDTO publication) throws DataBaseWriteException, DataBaseReadException, UserNotFoundException {
+    public void createPublicationService(PublicationWithUserIdDTO publication) {
         PublicationsDTO publicationDTO = new PublicationsDTO(publication);
         Integer userId = publication.getUserId();
 
@@ -36,7 +33,7 @@ public class ProductsServiceImpl implements ProductsService{
     }
 
     @Override
-    public PublicationsByUserDTO getPublicationsByUserService(Integer userId) throws DataBaseReadException, UserNotFoundException {
+    public PublicationsByUserDTO getPublicationsByUserService(Integer userId) {
         List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId).getFollowing();
         List<PublicationsDTO> publicationsDTOList = new LinkedList<>();
         PublicationsByUserDTO publicationsByUserDTO = new PublicationsByUserDTO();
