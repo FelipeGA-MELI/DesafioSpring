@@ -1,91 +1,5 @@
 [
   {
-    "userId": 4,
-    "userName": "Maria",
-    "followers": [
-      {
-        "userId": 1,
-        "userName": "Felipe Gusmao"
-      },
-      {
-        "userId": 10,
-        "userName": "Joao"
-      }
-    ],
-    "following": [],
-    "publications": [
-      {
-        "id_post": 24,
-        "date": "02-04-2021",
-        "detail": [
-          {
-            "product_id": 9,
-            "productName": "Moto",
-            "type": "Honda",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
-        "category": 100,
-        "price": 1500.5,
-        "hasPromo": null,
-        "discount": 0.0
-      }
-    ],
-    "seller": true
-  },
-  {
-    "userId": 1,
-    "userName": "Felipe Gusmao",
-    "followers": [],
-    "following": [
-      {
-        "userId": 4,
-        "userName": "Maria"
-      }
-    ],
-    "publications": [
-      {
-        "id_post": 24,
-        "date": "01-04-2021",
-        "detail": [
-          {
-            "product_id": 5,
-            "productName": "Carro",
-            "type": "Honda",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
-        "category": 100,
-        "price": 1500.5,
-        "hasPromo": null,
-        "discount": 0.0
-      },
-      {
-        "id_post": 29,
-        "date": "01-04-2021",
-        "detail": [
-          {
-            "product_id": 40,
-            "productName": "JetSky",
-            "type": "Gamer",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
-        "category": 100,
-        "price": 1500.5,
-        "hasPromo": null,
-        "discount": 0.0
-      }
-    ],
-    "seller": true
-  },
-  {
     "userId": 10,
     "userName": "Joao",
     "followers": [],
@@ -134,5 +48,101 @@
       }
     ],
     "seller": false
+  },
+  {
+    "userId": 1,
+    "userName": "Felipe Gusmao",
+    "followers": [
+      {
+        "userId": 4,
+        "userName": "Maria"
+      }
+    ],
+    "following": [
+      {
+        "userId": 4,
+        "userName": "Maria"
+      }
+    ],
+    "publications": [
+      {
+        "id_post": 24,
+        "date": "02-06-2021",
+        "detail": [
+          {
+            "product_id": 5,
+            "productName": "Carro",
+            "type": "Honda",
+            "brand": "Acer",
+            "color": "Black",
+            "notes": "Special Edition"
+          }
+        ],
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      },
+      {
+        "id_post": 29,
+        "date": "01-06-2021",
+        "detail": [
+          {
+            "product_id": 40,
+            "productName": "JetSky",
+            "type": "Gamer",
+            "brand": "Acer",
+            "color": "Black",
+            "notes": "Special Edition"
+          }
+        ],
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      }
+    ],
+    "seller": true
+  },
+  {
+    "userId": 4,
+    "userName": "Maria",
+    "followers": [
+      {
+        "userId": 1,
+        "userName": "Felipe Gusmao"
+      },
+      {
+        "userId": 10,
+        "userName": "Joao"
+      }
+    ],
+    "following": [
+      {
+        "userId": 1,
+        "userName": "Felipe Gusmao"
+      }
+    ],
+    "publications": [
+      {
+        "id_post": 24,
+        "date": "01-06-2021",
+        "detail": [
+          {
+            "product_id": 9,
+            "productName": "Moto",
+            "type": "Honda",
+            "brand": "Acer",
+            "color": "Black",
+            "notes": "Special Edition"
+          }
+        ],
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      }
+    ],
+    "seller": true
   }
 ]

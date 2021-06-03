@@ -80,9 +80,17 @@ public class UsersServiceImpl implements UsersService{
         UsersDTO user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
+        List<FollowersDTO> following = user.getFollowing();
+
+        if(order.equals("name_asc")) {
+            following.sort(new SortFollowersByName());
+        } else {
+            following.sort(new SortFollowersByName().reversed());
+        }
+
         allFollowingDTO.setUserId(user.getUserId());
         allFollowingDTO.setUserName(user.getUserName());
-        allFollowingDTO.setFollowing(user.getFollowing());
+        allFollowingDTO.setFollowing(following);
 
         return allFollowingDTO;
     }

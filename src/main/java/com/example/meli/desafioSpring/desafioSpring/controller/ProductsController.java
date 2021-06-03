@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public class ProductsController {
     private final ProductsService productsService;
+    private static final String DEFAULT_ORDER = "date_asc";
 
     public ProductsController(ProductsService productsService) {
         this.productsService = productsService;
@@ -23,7 +24,7 @@ public class ProductsController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<PublicationsByUserDTO> getPublicationsByUser(@PathVariable Integer userId) {
-        return new ResponseEntity<>(productsService.getPublicationsByUserService(userId),HttpStatus.OK);
+    public ResponseEntity<PublicationsByUserDTO> getPublicationsByUser(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
+        return new ResponseEntity<>(productsService.getPublicationsByUserService(userId,order),HttpStatus.OK);
     }
 }

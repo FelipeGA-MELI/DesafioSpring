@@ -6,5 +6,5 @@ import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsByUserDTO;
 public interface ProductsService {
     void createPublicationService(PublicationWithUserIdDTO publication);
 
-    PublicationsByUserDTO getPublicationsByUserService(Integer userId);
+    PublicationsByUserDTO getPublicationsByUserService(Integer userId, String order);
 }

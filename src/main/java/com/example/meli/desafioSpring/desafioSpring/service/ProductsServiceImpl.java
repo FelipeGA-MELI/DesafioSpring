@@ -2,6 +2,7 @@ package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
+import com.example.meli.desafioSpring.desafioSpring.sort.SortPublicationsByDate;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +34,7 @@ public class ProductsServiceImpl implements ProductsService{
     }
 
     @Override
-    public PublicationsByUserDTO getPublicationsByUserService(Integer userId) {
+    public PublicationsByUserDTO getPublicationsByUserService(Integer userId, String order) {
         List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId,"name_asc").getFollowing();
         List<PublicationsDTO> publicationsDTOList = new LinkedList<>();
         PublicationsByUserDTO publicationsByUserDTO = new PublicationsByUserDTO();
@@ -41,7 +42,11 @@ public class ProductsServiceImpl implements ProductsService{
         for(FollowersDTO following: followingDTOList)
             publicationsDTOList.addAll(apiRepository.getAllPublicationsByUserId(following.getUserId()));
 
-        sortPublicationsByDate(publicationsDTOList);
+        if(order.equals("date_asc")) {
+            publicationsDTOList.sort(new SortPublicationsByDate());
+        } else {
+            publicationsDTOList.sort(new SortPublicationsByDate().reversed());
+        }
 
         List<PublicationsDTO> publicationsFilteredByDate = publicationsDTOList
                 .stream().filter(publication -> getWeeksDifference(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),publication.getDate()) < 3 )
@@ -51,22 +56,6 @@ public class ProductsServiceImpl implements ProductsService{
         publicationsByUserDTO.setPosts(publicationsFilteredByDate);
 
         return publicationsByUserDTO;
-    }
-
-    private void sortPublicationsByDate(List<PublicationsDTO> publications) {
-      publications.sort((o1, o2) -> {
-          try {
-              if (formatter.parse(o1.getDate()).compareTo(formatter.parse(o2.getDate())) < 0) {
-                  return -1;
-              } else {
-                  return 1;
-              }
-          } catch (ParseException e) {
-              e.printStackTrace();
-          }
-
-          return 0;
-      });
     }
 
     private long getWeeksDifference(String date1, String date2) {
