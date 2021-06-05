@@ -68,7 +68,12 @@ public class ProductsServiceImpl implements ProductsService{
     @Override
     public NumberOfPublicationsDTO getNumberPublications(Integer userId) {
         Users user = apiRepository.findById(userId);
-        Integer numberOfPublications = user.getPublications().size();
+        Integer numberOfPublications = 0;
+
+        for(Publications publication: user.getPublications()) {
+            if(publication.getHasPromo())
+                numberOfPublications++;
+        }
 
         NumberOfPublicationsDTO numberOfPublicationsDTO = new NumberOfPublicationsDTO();
         numberOfPublicationsDTO.setUserId(user.getUserId());
