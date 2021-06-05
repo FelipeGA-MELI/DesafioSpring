@@ -1,8 +1,8 @@
 package com.example.meli.desafioSpring.desafioSpring.controller;
 
-import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowersDTO;
+import com.example.meli.desafioSpring.desafioSpring.DTO.AllUserIdAndNameDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowingDTO;
-import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfFollowersDTO;
+import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfUserIdAndNameDTO;
 import com.example.meli.desafioSpring.desafioSpring.service.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +25,12 @@ public class UsersController {
     }
 
     @GetMapping("/{userId}/followers/count/")
-    public ResponseEntity<NumberOfFollowersDTO> getNumberOfFollowers(@PathVariable Integer userId) {
+    public ResponseEntity<NumberOfUserIdAndNameDTO> getNumberOfFollowers(@PathVariable Integer userId) {
         return new ResponseEntity<>(usersService.getNumberFollowersService(userId),HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<AllFollowersDTO> getFollowers(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
+    public ResponseEntity<AllUserIdAndNameDTO> getFollowers(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
         return new ResponseEntity<>(usersService.getFollowersService(userId,order),HttpStatus.OK);
     }
 

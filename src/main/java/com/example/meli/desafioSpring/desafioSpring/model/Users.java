@@ -1,14 +1,14 @@
 package com.example.meli.desafioSpring.desafioSpring.model;
 
-import com.example.meli.desafioSpring.desafioSpring.DTO.FollowersDTO;
+import com.example.meli.desafioSpring.desafioSpring.DTO.UserIdAndNameDTO;
 
 import java.util.List;
 
 public class Users {
     private Integer userId;
     private String userName;
-    private List<FollowersDTO> followers;
-    private List<FollowersDTO> following;
+    private List<UserIdAndNameDTO> followers;
+    private List<UserIdAndNameDTO> following;
     private List<Publications> publications;
     private Boolean isSeller;
 
@@ -40,19 +40,19 @@ public class Users {
         this.userName = userName;
     }
 
-    public List<FollowersDTO> getFollowers() {
+    public List<UserIdAndNameDTO> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<FollowersDTO> followers) {
+    public void setFollowers(List<UserIdAndNameDTO> followers) {
         this.followers = followers;
     }
 
-    public List<FollowersDTO> getFollowing() {
+    public List<UserIdAndNameDTO> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<FollowersDTO> following) {
+    public void setFollowing(List<UserIdAndNameDTO> following) {
         this.following = following;
     }
 

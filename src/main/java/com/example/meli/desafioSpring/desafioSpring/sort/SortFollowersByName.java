@@ -1,12 +1,12 @@
 package com.example.meli.desafioSpring.desafioSpring.sort;
 
-import com.example.meli.desafioSpring.desafioSpring.DTO.FollowersDTO;
+import com.example.meli.desafioSpring.desafioSpring.DTO.UserIdAndNameDTO;
 
 import java.util.Comparator;
 
-public class SortFollowersByName implements Comparator<FollowersDTO> {
+public class SortFollowersByName implements Comparator<UserIdAndNameDTO> {
     @Override
-    public int compare(FollowersDTO o1, FollowersDTO o2) {
+    public int compare(UserIdAndNameDTO o1, UserIdAndNameDTO o2) {
         if(o1.getUserName().compareTo(o2.getUserName()) < 0) {
             return -1;
         } else { return 1; }

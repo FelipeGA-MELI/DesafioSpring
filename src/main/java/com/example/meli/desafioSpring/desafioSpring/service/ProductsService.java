@@ -1,5 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.service;
 
+import com.example.meli.desafioSpring.desafioSpring.DTO.AllPromoPublicationsDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfPublicationsDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsByUserDTO;
@@ -10,4 +11,6 @@ public interface ProductsService {
     PublicationsByUserDTO getPublicationsByUserService(Integer userId, String order);
 
     NumberOfPublicationsDTO getNumberPublications(Integer userId);
+
+    AllPromoPublicationsDTO getPromoPublications(Integer userId);
 }

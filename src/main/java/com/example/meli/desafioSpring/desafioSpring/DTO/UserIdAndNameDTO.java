@@ -1,6 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.DTO;
 
-public class FollowersDTO {
+public class UserIdAndNameDTO {
     private Integer userId;
     private String userName;
 

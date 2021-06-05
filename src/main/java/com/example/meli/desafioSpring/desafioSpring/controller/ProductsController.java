@@ -1,5 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.controller;
 
+import com.example.meli.desafioSpring.desafioSpring.DTO.AllPromoPublicationsDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfPublicationsDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsByUserDTO;
@@ -38,5 +39,10 @@ public class ProductsController {
     @GetMapping("{userId}/countPromo/")
     public ResponseEntity<NumberOfPublicationsDTO> getNumberOfPublications(@PathVariable Integer userId) {
         return new ResponseEntity<>(productsService.getNumberPublications(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("{userId}/list")
+    public ResponseEntity<AllPromoPublicationsDTO> getAllPromoPublications(@PathVariable Integer userId) {
+        return new ResponseEntity<>(productsService.getPromoPublications(userId),HttpStatus.OK);
     }
 }

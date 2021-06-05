@@ -42,11 +42,11 @@ public class ProductsServiceImpl implements ProductsService{
 
     @Override
     public PublicationsByUserDTO getPublicationsByUserService(Integer userId, String order) {
-        List<FollowersDTO> followingDTOList = usersService.getFollowedByService(userId,"name_asc").getFollowing();
+        List<UserIdAndNameDTO> followingDTOList = usersService.getFollowedByService(userId,"name_asc").getFollowing();
         List<Publications> publicationsList = new LinkedList<>();
         PublicationsByUserDTO publicationsByUserDTO = new PublicationsByUserDTO();
 
-        for(FollowersDTO following: followingDTOList)
+        for(UserIdAndNameDTO following: followingDTOList)
             publicationsList.addAll(apiRepository.getAllPublicationsByUserId(following.getUserId()));
 
         if(order.equals("date_asc")) {
@@ -81,6 +81,24 @@ public class ProductsServiceImpl implements ProductsService{
         numberOfPublicationsDTO.setPromoproducts_count(numberOfPublications);
 
         return numberOfPublicationsDTO;
+    }
+
+    @Override
+    public AllPromoPublicationsDTO getPromoPublications(Integer userId) {
+        Users user = apiRepository.findById(userId);
+        List<Publications> publicationsPromo = new LinkedList<>();
+
+        for(Publications publication: user.getPublications()) {
+            if(publication.getHasPromo())
+                publicationsPromo.add(publication);
+        }
+
+        AllPromoPublicationsDTO allPromoPublicationsDTO = new AllPromoPublicationsDTO();
+        allPromoPublicationsDTO.setUserId(user.getUserId());
+        allPromoPublicationsDTO.setUserName(user.getUserName());
+        allPromoPublicationsDTO.setPosts(publicationsPromo);
+
+        return allPromoPublicationsDTO;
     }
 
     private long getWeeksDifference(String date1, String date2) {

@@ -20,17 +20,17 @@ public class UsersServiceImpl implements UsersService{
         Users user = apiRepository.findById(userId);
         Users userToFollow = apiRepository.findById(userIdToFollow);
 
-        List<FollowersDTO> followersDTOList = user.getFollowers();
-        FollowersDTO followersDTO = new FollowersDTO();
-        followersDTO.setUserId(userToFollow.getUserId());
-        followersDTO.setUserName(userToFollow.getUserName());
+        List<UserIdAndNameDTO> userIdAndNameDTOList = user.getFollowers();
+        UserIdAndNameDTO userIdAndNameDTO = new UserIdAndNameDTO();
+        userIdAndNameDTO.setUserId(userToFollow.getUserId());
+        userIdAndNameDTO.setUserName(userToFollow.getUserName());
 
-        followersDTOList.add(followersDTO);
+        userIdAndNameDTOList.add(userIdAndNameDTO);
 
-        user.setFollowers(followersDTOList);
+        user.setFollowers(userIdAndNameDTOList);
 
-        List<FollowersDTO> followingDTOList = userToFollow.getFollowing();
-        FollowersDTO followingDTO = new FollowersDTO();
+        List<UserIdAndNameDTO> followingDTOList = userToFollow.getFollowing();
+        UserIdAndNameDTO followingDTO = new UserIdAndNameDTO();
         followingDTO.setUserId(user.getUserId());
         followingDTO.setUserName(user.getUserName());
 
@@ -42,11 +42,11 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public NumberOfFollowersDTO getNumberFollowersService(Integer userId) {
+    public NumberOfUserIdAndNameDTO getNumberFollowersService(Integer userId) {
         Users user = apiRepository.findById(userId);
         Integer followersCount = user.getFollowers().size();
 
-        NumberOfFollowersDTO numberOfFollowersDTO = new NumberOfFollowersDTO();
+        NumberOfUserIdAndNameDTO numberOfFollowersDTO = new NumberOfUserIdAndNameDTO();
         numberOfFollowersDTO.setUserId(userId);
         numberOfFollowersDTO.setUserName(user.getUserName());
         numberOfFollowersDTO.setFollowers_count(followersCount);
@@ -55,11 +55,11 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public AllFollowersDTO getFollowersService(Integer userId, String order) {
+    public AllUserIdAndNameDTO getFollowersService(Integer userId, String order) {
         Users user = apiRepository.findById(userId);
-        AllFollowersDTO allFollowersDTO = new AllFollowersDTO();
+        AllUserIdAndNameDTO allFollowersDTO = new AllUserIdAndNameDTO();
 
-        List<FollowersDTO> followers = user.getFollowers();
+        List<UserIdAndNameDTO> followers = user.getFollowers();
 
         if(order.equals("name_asc")) {
             followers.sort(new SortFollowersByName());
@@ -79,7 +79,7 @@ public class UsersServiceImpl implements UsersService{
         Users user = apiRepository.findById(userId);
         AllFollowingDTO allFollowingDTO = new AllFollowingDTO();
 
-        List<FollowersDTO> following = user.getFollowing();
+        List<UserIdAndNameDTO> following = user.getFollowing();
 
         if(order.equals("name_asc")) {
             following.sort(new SortFollowersByName());
@@ -99,13 +99,13 @@ public class UsersServiceImpl implements UsersService{
         Users user = apiRepository.findById(userId);
         Users userToUnfollow = apiRepository.findById(userIdToUnfollow);
 
-        List<FollowersDTO> followingDTOList = user.getFollowing();
+        List<UserIdAndNameDTO> followingDTOList = user.getFollowing();
         followingDTOList.removeIf(userRem -> userRem.getUserId().equals(userIdToUnfollow));
         user.setFollowing(followingDTOList);
 
-        List<FollowersDTO> followersDTOList = userToUnfollow.getFollowers();
-        followersDTOList.removeIf(usrUnFollowRem -> usrUnFollowRem.getUserId().equals(userId));
-        userToUnfollow.setFollowers(followersDTOList);
+        List<UserIdAndNameDTO> userIdAndNameDTOList = userToUnfollow.getFollowers();
+        userIdAndNameDTOList.removeIf(usrUnFollowRem -> usrUnFollowRem.getUserId().equals(userId));
+        userToUnfollow.setFollowers(userIdAndNameDTOList);
 
         apiRepository.setFollower(user,userToUnfollow);
     }
