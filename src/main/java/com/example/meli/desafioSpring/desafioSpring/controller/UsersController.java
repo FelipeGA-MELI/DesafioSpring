@@ -2,7 +2,7 @@ package com.example.meli.desafioSpring.desafioSpring.controller;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowersDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowingDTO;
-import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfFollowers;
+import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfFollowersDTO;
 import com.example.meli.desafioSpring.desafioSpring.service.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class UsersController {
     }
 
     @GetMapping("/{userId}/followers/count/")
-    public ResponseEntity<NumberOfFollowers> getNumberFollowers(@PathVariable Integer userId) {
+    public ResponseEntity<NumberOfFollowersDTO> getNumberOfFollowers(@PathVariable Integer userId) {
         return new ResponseEntity<>(usersService.getNumberFollowersService(userId),HttpStatus.OK);
     }
 

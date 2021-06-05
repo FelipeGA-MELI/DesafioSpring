@@ -1,55 +1,5 @@
 [
   {
-    "userId": 10,
-    "userName": "Joao",
-    "followers": [],
-    "following": [
-      {
-        "userId": 4,
-        "userName": "Maria"
-      }
-    ],
-    "publications": [
-      {
-        "id_post": 18,
-        "date": "05-02-2019",
-        "detail": [
-          {
-            "product_id": 9,
-            "productName": "Mesa",
-            "type": "Gamer",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
-        "category": 100,
-        "price": 1500.5,
-        "hasPromo": null,
-        "discount": 0.0
-      },
-      {
-        "id_post": 18,
-        "date": "01-06-2021",
-        "detail": [
-          {
-            "product_id": 10,
-            "productName": "Caderno",
-            "type": "Gamer",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
-        "category": 100,
-        "price": 1500.5,
-        "hasPromo": null,
-        "discount": 0.0
-      }
-    ],
-    "seller": false
-  },
-  {
     "userId": 1,
     "userName": "Felipe Gusmao",
     "followers": [
@@ -68,16 +18,14 @@
       {
         "id_post": 24,
         "date": "02-06-2021",
-        "detail": [
-          {
-            "product_id": 5,
-            "productName": "Carro",
-            "type": "Honda",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
+        "detail": {
+          "product_id": 5,
+          "productName": "Carro",
+          "type": "Honda",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
         "category": 100,
         "price": 1500.5,
         "hasPromo": null,
@@ -86,16 +34,14 @@
       {
         "id_post": 29,
         "date": "01-06-2021",
-        "detail": [
-          {
-            "product_id": 40,
-            "productName": "JetSky",
-            "type": "Gamer",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
+        "detail": {
+          "product_id": 40,
+          "productName": "JetSky",
+          "type": "Gamer",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
         "category": 100,
         "price": 1500.5,
         "hasPromo": null,
@@ -103,6 +49,68 @@
       }
     ],
     "seller": true
+  },
+  {
+    "userId": 10,
+    "userName": "Joao",
+    "followers": [],
+    "following": [
+      {
+        "userId": 4,
+        "userName": "Maria"
+      }
+    ],
+    "publications": [
+      {
+        "id_post": 18,
+        "date": "05-02-2019",
+        "detail": {
+          "product_id": 9,
+          "productName": "Mesa",
+          "type": "Gamer",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      },
+      {
+        "id_post": 18,
+        "date": "01-06-2021",
+        "detail": {
+          "product_id": 10,
+          "productName": "Caderno",
+          "type": "Gamer",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": null,
+        "discount": 0.0
+      },
+      {
+        "id_post": 18,
+        "date": "29-06-2021",
+        "detail": {
+          "product_id": 1,
+          "productName": "monitor Gamer",
+          "type": "Gamer",
+          "brand": "Racer",
+          "color": "Red & Black",
+          "notes": "Special Edition"
+        },
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": true,
+        "discount": 0.25
+      }
+    ],
+    "seller": false
   },
   {
     "userId": 4,
@@ -127,19 +135,33 @@
       {
         "id_post": 24,
         "date": "01-06-2021",
-        "detail": [
-          {
-            "product_id": 9,
-            "productName": "Moto",
-            "type": "Honda",
-            "brand": "Acer",
-            "color": "Black",
-            "notes": "Special Edition"
-          }
-        ],
+        "detail": {
+          "product_id": 9,
+          "productName": "Moto",
+          "type": "Honda",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
         "category": 100,
         "price": 1500.5,
         "hasPromo": null,
+        "discount": 0.0
+      },
+      {
+        "id_post": 18,
+        "date": "29-06-2021",
+        "detail": {
+          "product_id": 1,
+          "productName": "mesa Gamer",
+          "type": "Gamer",
+          "brand": "Racer",
+          "color": "Red & Black",
+          "notes": "Special Edition"
+        },
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": false,
         "discount": 0.0
       }
     ],

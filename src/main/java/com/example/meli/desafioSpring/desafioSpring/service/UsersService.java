@@ -2,12 +2,12 @@ package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowersDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowingDTO;
-import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfFollowers;
+import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfFollowersDTO;
 
 public interface UsersService {
     void followSellerService(Integer userId, Integer userIdToFllow);
 
-    NumberOfFollowers getNumberFollowersService(Integer userId);
+    NumberOfFollowersDTO getNumberFollowersService(Integer userId);
 
     AllFollowersDTO getFollowersService(Integer userId, String order);
 

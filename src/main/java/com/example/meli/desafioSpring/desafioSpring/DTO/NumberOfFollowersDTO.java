@@ -1,6 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.DTO;
 
-public class NumberOfFollowers extends FollowersDTO{
+public class NumberOfFollowersDTO extends FollowersDTO{
     private Integer followers_count;
 
     public Integer getFollowers_count() {

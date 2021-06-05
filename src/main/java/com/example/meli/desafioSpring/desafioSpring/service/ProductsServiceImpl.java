@@ -2,6 +2,7 @@ package com.example.meli.desafioSpring.desafioSpring.service;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.*;
 import com.example.meli.desafioSpring.desafioSpring.model.Publications;
+import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import com.example.meli.desafioSpring.desafioSpring.sort.SortPublicationsByDate;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,14 @@ public class ProductsServiceImpl implements ProductsService{
     }
 
     @Override
-    public void createPublicationService(PublicationWithUserIdDTO publication) {
+    public void createPublicationService(PublicationWithUserIdDTO publication, Boolean hasPromo) {
         Publications publicationDTO = new Publications(publication);
         Integer userId = publication.getUserId();
+
+        if(!hasPromo) {
+            publicationDTO.setHasPromo(hasPromo);
+            publicationDTO.setDiscount(0.0);
+        }
 
         apiRepository.createPublication(userId,publicationDTO);
     }
@@ -57,6 +63,19 @@ public class ProductsServiceImpl implements ProductsService{
         publicationsByUserDTO.setPosts(publicationsFilteredByDate);
 
         return publicationsByUserDTO;
+    }
+
+    @Override
+    public NumberOfPublicationsDTO getNumberPublications(Integer userId) {
+        Users user = apiRepository.findById(userId);
+        Integer numberOfPublications = user.getPublications().size();
+
+        NumberOfPublicationsDTO numberOfPublicationsDTO = new NumberOfPublicationsDTO();
+        numberOfPublicationsDTO.setUserId(user.getUserId());
+        numberOfPublicationsDTO.setUserName(user.getUserName());
+        numberOfPublicationsDTO.setPromoproducts_count(numberOfPublications);
+
+        return numberOfPublicationsDTO;
     }
 
     private long getWeeksDifference(String date1, String date2) {

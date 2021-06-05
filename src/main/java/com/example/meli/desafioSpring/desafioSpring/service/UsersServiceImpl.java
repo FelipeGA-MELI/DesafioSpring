@@ -5,7 +5,6 @@ import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import com.example.meli.desafioSpring.desafioSpring.repository.APIRepository;
 import com.example.meli.desafioSpring.desafioSpring.sort.SortFollowersByName;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -43,16 +42,16 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public NumberOfFollowers getNumberFollowersService(Integer userId) {
+    public NumberOfFollowersDTO getNumberFollowersService(Integer userId) {
         Users user = apiRepository.findById(userId);
         Integer followersCount = user.getFollowers().size();
 
-        NumberOfFollowers numberOfFollowers = new NumberOfFollowers();
-        numberOfFollowers.setUserId(userId);
-        numberOfFollowers.setUserName(user.getUserName());
-        numberOfFollowers.setFollowers_count(followersCount);
+        NumberOfFollowersDTO numberOfFollowersDTO = new NumberOfFollowersDTO();
+        numberOfFollowersDTO.setUserId(userId);
+        numberOfFollowersDTO.setUserName(user.getUserName());
+        numberOfFollowersDTO.setFollowers_count(followersCount);
 
-        return numberOfFollowers;
+        return numberOfFollowersDTO;
     }
 
     @Override

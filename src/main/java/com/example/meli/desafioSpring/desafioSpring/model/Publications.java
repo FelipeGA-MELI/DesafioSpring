@@ -2,12 +2,10 @@ package com.example.meli.desafioSpring.desafioSpring.model;
 
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
 
-import java.util.List;
-
 public class Publications {
     private Integer id_post;
     private String date;
-    private List<Products> detail;
+    private Products detail;
     private Integer category;
     private double price;
     private Boolean hasPromo;
@@ -41,11 +39,11 @@ public class Publications {
         this.date = date;
     }
 
-    public List<Products> getDetail() {
+    public Products getDetail() {
         return detail;
     }
 
-    public void setDetail(List<Products> detail) {
+    public void setDetail(Products detail) {
         this.detail = detail;
     }
 

@@ -1,5 +1,6 @@
 package com.example.meli.desafioSpring.desafioSpring.controller;
 
+import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfPublicationsDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationWithUserIdDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.PublicationsByUserDTO;
 import com.example.meli.desafioSpring.desafioSpring.service.ProductsService;
@@ -20,11 +21,22 @@ public class ProductsController {
     @PostMapping("/newpost")
     @ResponseStatus(HttpStatus.OK)
     public void createPublication(@RequestBody PublicationWithUserIdDTO publicationWithUserIdDTO) {
-        productsService.createPublicationService(publicationWithUserIdDTO);
+        productsService.createPublicationService(publicationWithUserIdDTO, false);
+    }
+
+    @PostMapping("/newpromopost")
+    @ResponseStatus(HttpStatus.OK)
+    public void createPromoPublication(@RequestBody PublicationWithUserIdDTO publicationWithUserIdDTO) {
+        productsService.createPublicationService(publicationWithUserIdDTO, true);
     }
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<PublicationsByUserDTO> getPublicationsByUser(@PathVariable Integer userId, @RequestParam(defaultValue = DEFAULT_ORDER) String order) {
         return new ResponseEntity<>(productsService.getPublicationsByUserService(userId,order),HttpStatus.OK);
+    }
+
+    @GetMapping("{userId}/countPromo/")
+    public ResponseEntity<NumberOfPublicationsDTO> getNumberOfPublications(@PathVariable Integer userId) {
+        return new ResponseEntity<>(productsService.getNumberPublications(userId),HttpStatus.OK);
     }
 }
