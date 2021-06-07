@@ -1,26 +1,30 @@
 [
   {
-    "userId": 1,
-    "userName": "Felipe Gusmao",
+    "userId": 4,
+    "userName": "Maria",
     "followers": [
       {
-        "userId": 4,
-        "userName": "Maria"
+        "userId": 1,
+        "userName": "Felipe Gusmao"
+      },
+      {
+        "userId": 10,
+        "userName": "Joao"
       }
     ],
     "following": [
       {
-        "userId": 4,
-        "userName": "Maria"
+        "userId": 1,
+        "userName": "Felipe Gusmao"
       }
     ],
     "publications": [
       {
         "id_post": 24,
-        "date": "02-06-2021",
+        "date": "01-06-2021",
         "detail": {
-          "product_id": 5,
-          "productName": "Carro",
+          "product_id": 9,
+          "productName": "Moto",
           "type": "Honda",
           "brand": "Acer",
           "color": "Black",
@@ -32,14 +36,14 @@
         "discount": 0.0
       },
       {
-        "id_post": 29,
-        "date": "01-06-2021",
+        "id_post": 18,
+        "date": "29-06-2021",
         "detail": {
-          "product_id": 40,
-          "productName": "JetSky",
+          "product_id": 1,
+          "productName": "mesa Gamer",
           "type": "Gamer",
-          "brand": "Acer",
-          "color": "Black",
+          "brand": "Racer",
+          "color": "Red & Black",
           "notes": "Special Edition"
         },
         "category": 100,
@@ -48,16 +52,25 @@
         "discount": 0.0
       }
     ],
-    "seller": true
+    "seller": null
   },
   {
     "userId": 10,
     "userName": "Joao",
-    "followers": [],
+    "followers": [
+      {
+        "userId": 1,
+        "userName": "Felipe Gusmao"
+      }
+    ],
     "following": [
       {
         "userId": 4,
         "userName": "Maria"
+      },
+      {
+        "userId": 1,
+        "userName": "Felipe Gusmao"
       }
     ],
     "publications": [
@@ -110,34 +123,42 @@
         "discount": 0.25
       }
     ],
-    "seller": false
+    "seller": null
   },
   {
-    "userId": 4,
-    "userName": "Maria",
+    "userId": 1,
+    "userName": "Felipe Gusmao",
     "followers": [
       {
-        "userId": 1,
-        "userName": "Felipe Gusmao"
+        "userId": 4,
+        "userName": "Maria"
+      },
+      {
+        "userId": 10,
+        "userName": "Joao"
+      },
+      {
+        "userId": 5,
+        "userName": "Allan"
+      }
+    ],
+    "following": [
+      {
+        "userId": 4,
+        "userName": "Maria"
       },
       {
         "userId": 10,
         "userName": "Joao"
       }
     ],
-    "following": [
-      {
-        "userId": 1,
-        "userName": "Felipe Gusmao"
-      }
-    ],
     "publications": [
       {
         "id_post": 24,
-        "date": "01-06-2021",
+        "date": "02-06-2021",
         "detail": {
-          "product_id": 9,
-          "productName": "Moto",
+          "product_id": 5,
+          "productName": "Carro",
           "type": "Honda",
           "brand": "Acer",
           "color": "Black",
@@ -149,11 +170,41 @@
         "discount": 0.0
       },
       {
-        "id_post": 18,
-        "date": "29-06-2021",
+        "id_post": 29,
+        "date": "01-06-2021",
         "detail": {
-          "product_id": 1,
-          "productName": "mesa Gamer",
+          "product_id": 40,
+          "productName": "JetSky",
+          "type": "Gamer",
+          "brand": "Acer",
+          "color": "Black",
+          "notes": "Special Edition"
+        },
+        "category": 100,
+        "price": 1500.5,
+        "hasPromo": false,
+        "discount": 0.0
+      }
+    ],
+    "seller": null
+  },
+  {
+    "userId": 5,
+    "userName": "Allan",
+    "followers": [],
+    "following": [
+      {
+        "userId": 1,
+        "userName": "Felipe Gusmao"
+      }
+    ],
+    "publications": [
+      {
+        "id_post": 46,
+        "date": "01-03-2021",
+        "detail": {
+          "product_id": 456,
+          "productName": "Cadeira Gamer",
           "type": "Gamer",
           "brand": "Racer",
           "color": "Red & Black",

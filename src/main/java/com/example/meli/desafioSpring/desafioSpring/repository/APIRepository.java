@@ -5,6 +5,8 @@ import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import java.util.List;
 
 public interface APIRepository {
+    void createUser(Users user);
+
     Users findById(Integer userId);
 
     void setFollower(Users users, Users userToFollow);

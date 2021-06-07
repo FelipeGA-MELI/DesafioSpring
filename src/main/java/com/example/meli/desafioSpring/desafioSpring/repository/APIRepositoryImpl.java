@@ -21,6 +21,16 @@ public class APIRepositoryImpl implements APIRepository {
     List<Users> dataBase = dataBaseRead();
 
     @Override
+    public void createUser(Users user) {
+        if(dataBase.isEmpty())
+            throw new DataBaseReadException("Data base is null.");
+
+        dataBase.add(user);
+
+        dataBaseWrite(dataBase);
+    }
+
+    @Override
     public Users findById(Integer userId) {
         Users userFound;
 

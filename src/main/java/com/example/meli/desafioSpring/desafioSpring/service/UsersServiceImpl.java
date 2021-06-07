@@ -109,4 +109,9 @@ public class UsersServiceImpl implements UsersService{
 
         apiRepository.setFollower(user,userToUnfollow);
     }
+
+    @Override
+    public void createUserService(Users user) {
+        apiRepository.createUser(user);
+    }
 }

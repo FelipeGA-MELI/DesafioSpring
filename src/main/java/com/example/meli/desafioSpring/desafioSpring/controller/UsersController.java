@@ -3,6 +3,7 @@ package com.example.meli.desafioSpring.desafioSpring.controller;
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllUserIdAndNameDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.AllFollowingDTO;
 import com.example.meli.desafioSpring.desafioSpring.DTO.NumberOfUserIdAndNameDTO;
+import com.example.meli.desafioSpring.desafioSpring.model.Users;
 import com.example.meli.desafioSpring.desafioSpring.service.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,11 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
     public void UnfollowSeller(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
         usersService.unfollowSellerService(userId,userIdToUnfollow);
+    }
+
+    @PostMapping("create")
+    @ResponseStatus(HttpStatus.OK)
+    public void createUser(@RequestBody Users user) {
+        usersService.createUserService(user);
     }
 }
