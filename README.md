@@ -25,7 +25,7 @@ Para execução na sua máquina, altere este diretório para o diretório respec
   GET 127.0.0.1:8080/users/{userId}/followers/list
 
 - Gerar lista de quem o usuário está seguindo:
-  GET 127.0.0.1:8080/users//{userId}/followed/list
+  GET 127.0.0.1:8080/users/{userId}/followed/list
 
 - Deixar de seguir usuário:
   POST 127.0.0.1:8080users/{userId}/unfollow/{userIdToUnfollow}
