@@ -19,11 +19,15 @@ import java.util.List;
 @Repository
 public class APIRepositoryImpl implements APIRepository {
     List<Users> dataBase = dataBaseRead();
+    private static final String DIRETORIO_JSON = "/Users/fgusmao/Downloads/desafioSpring/user.json";
+    private static final String DBREAD_EXCEPTION = "Data base is null.";
+    private static final String DBWRITE_EXCEPTION = "Couldn't write to database.";
+    private static final String USERNOTFOUND_EXCEPTION = "User not found.";
 
     @Override
     public void createUser(Users user) {
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null.");
+            throw new DataBaseReadException(DBREAD_EXCEPTION);
 
         dataBase.add(user);
 
@@ -35,11 +39,11 @@ public class APIRepositoryImpl implements APIRepository {
         Users userFound;
 
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null.");
+            throw new DataBaseReadException(DBREAD_EXCEPTION);
 
         userFound = dataBase.stream().filter(user -> user.getUserId().equals(userId))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException(USERNOTFOUND_EXCEPTION));
 
         return userFound;
     }
@@ -47,16 +51,16 @@ public class APIRepositoryImpl implements APIRepository {
     @Override
     public void setFollower(Users users, Users userToFollow) {
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null.");
+            throw new DataBaseReadException(DBREAD_EXCEPTION);
 
         Users userFiltered = dataBase.stream()
                 .filter(user -> user.getUserId().equals(users.getUserId()))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException(USERNOTFOUND_EXCEPTION));
         Users userToFollowFiltered = dataBase.stream()
                 .filter(follower -> follower.getUserId().equals(userToFollow.getUserId()))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException(USERNOTFOUND_EXCEPTION));
 
         dataBase.remove(userFiltered);
         dataBase.remove(userToFollowFiltered);
@@ -71,11 +75,11 @@ public class APIRepositoryImpl implements APIRepository {
         Users filteredUser;
 
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null.");
+            throw new DataBaseReadException(DBREAD_EXCEPTION);
 
         filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException(USERNOTFOUND_EXCEPTION));
 
         return filteredUser.getUserName();
     }
@@ -86,11 +90,11 @@ public class APIRepositoryImpl implements APIRepository {
         Users filteredUser;
 
         if(dataBase.isEmpty())
-            throw new DataBaseReadException("Data base is null.");
+            throw new DataBaseReadException(DBREAD_EXCEPTION);
 
         filteredUser = dataBase.stream().filter(user -> user.getUserId().equals(userId))
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException(USERNOTFOUND_EXCEPTION));
 
         publicationsList = filteredUser.getPublications();
         publicationsList.add(publication);
@@ -116,7 +120,7 @@ public class APIRepositoryImpl implements APIRepository {
         try {
             objectMapper.writeValue(Paths.get("user.json").toFile(), usersList);
         } catch (IOException e) {
-            throw new DataBaseWriteException("Couldnt write to database.");
+            throw new DataBaseWriteException(DBWRITE_EXCEPTION);
         }
     }
 
@@ -124,7 +128,7 @@ public class APIRepositoryImpl implements APIRepository {
         File file = null;
 
         try {
-            file = ResourceUtils.getFile("/Users/fgusmao/Downloads/desafioSpring/user.json");
+            file = ResourceUtils.getFile(DIRETORIO_JSON);
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }
