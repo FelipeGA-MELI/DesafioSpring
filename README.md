@@ -7,7 +7,7 @@ Projeto de uma API para interação entre usuários e publicação de produtos. 
 Para executar a API não é necessária nenhuma instalação. Basta executar o projeto na sua IDE de preferência.
 Como pedido no desafio, não foi utilizado banco de dados, apenas JSON.
 O JSON encontra-se no diretório: "/Users/fgusmao/Downloads/desafioSpring/user.json"
-Para execução na sua máquina, altere este diretório para o diretório respectivo da sua máquina. Esta configuração deve ser modificada em repository/APIrepository, linha 22, na constante "DIRETORIO_JSON".
+Para execução na sua máquina, altere este diretório para o diretório respectivo da sua máquina. Esta configuração deve ser modificada em repository/APIRepositoryImpl, linha 22, na constante "DIRETORIO_JSON".
 
 ## Endpoints da API
 
