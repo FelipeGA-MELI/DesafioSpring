@@ -52,7 +52,7 @@
         "discount": 0.0
       }
     ],
-    "seller": null
+    "seller": true
   },
   {
     "userId": 10,
@@ -123,7 +123,7 @@
         "discount": 0.25
       }
     ],
-    "seller": null
+    "seller": true
   },
   {
     "userId": 1,
@@ -186,7 +186,7 @@
         "discount": 0.0
       }
     ],
-    "seller": null
+    "seller": true
   },
   {
     "userId": 5,
